@@ -7,7 +7,7 @@ export * from "../core/view";
 
 export const srcProperty = new Property<WebViewBase, string>({ name: "src" });
 export const syncCookiesProperty = new Property<WebViewBase, boolean>({ name: "syncCookies", defaultValue: false, valueConverter: booleanConverter });
-export const cookieExpiresInProperty = new Property<WebViewBase, boolean>({ name: "cookieExpiresIn" });
+export const cookieExpiresInProperty = new Property<WebViewBase, number>({ name: "cookieExpiresIn", valueConverter: parseInt });
 
 export abstract class WebViewBase extends View implements WebViewDefinition {
     public static loadStartedEvent = "loadStarted";
@@ -15,7 +15,7 @@ export abstract class WebViewBase extends View implements WebViewDefinition {
 
     public src: string;
     public syncCookies: boolean;
-    public cookieExpiresIn: string;
+    public cookieExpiresIn: number;
 
     public _onLoadFinished(url: string, error?: string) {
         let args = <LoadEventData>{
